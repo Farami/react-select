@@ -264,6 +264,14 @@ class Select extends React.Component {
 			return;
 		}
 
+		// when element has scrollbar visible
+		if (event.target.scrollHeight > window.getComputedStyle(event.target).getPropertyValue('height')) {
+			// and mouseDown occured close enough to border to be scrollbar click
+			if (event.clientX >= event.target.getBoundingClientRect().left + document.body.scrollLeft + event.target.offsetWidth - 20) {
+				return;
+			}
+		}
+
 		if (event.target.tagName === 'INPUT') {
 			if (!this.state.isFocused) {
 				this._openAfterFocus = this.props.openOnClick;
